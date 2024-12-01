@@ -54,7 +54,7 @@ public class SocobanV1 {
         }
         return stages;
     }
-
+    // (2) 한 줄의 데이터를 변환 (기호 -> 숫자)
     private static int[] convertData(String s) {
         int[] rowData = new int[s.length()];
         for (int i = 0; i < s.length(); i++) {
@@ -72,7 +72,7 @@ public class SocobanV1 {
     }
 
 }
-// (2) Stage 클래스: 스테이지 정보를 저장하는 객체
+// (3) Stage 클래스: 스테이지 정보를 저장하는 객체
 class Stage {
     private final String name; // 스테이지 이름
     private final char[][] map; // 맵 데이터
