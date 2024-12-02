@@ -48,16 +48,34 @@ public class LottoGameV2 {
         System.out.println("로또 당첨 숫자 : " +sortedRandomNum + " + 보너스 숫자 " + bonusNum);
         System.out.println("플레이의 숫자 : " +sortedPlayerNum);
 
-        int matchedCount = findMaches(playerNum,randomNum);
-
-        System.out.println("일치하는 숫자 개수 : " + matchedCount);
+        String rank = determineRank(playerNum, randomNum, bonusNum);
+        System.out.println("결과: " + rank);
 
     }
-    // 교집합 구하는 메서드
-    private static int findMaches(Set<Integer> playerNum, Set<Integer> randomNum) {
+    // 당첨 등수 판별 메서드
+    private static String determineRank(Set<Integer> playerNum, Set<Integer> randomNum, int bonusNum) {
+        // 1. 교집합 계산: 당첨 번호와 일치하는 숫자 개수
         Set<Integer> intersection = new HashSet<>(playerNum);
         intersection.retainAll(randomNum);
-        return intersection.size();
+        int matchedCount = intersection.size();
+
+        // 2. 보너스 번호 포함 여부 확인
+        boolean hasBouns = playerNum.contains(bonusNum);
+
+        // 3. 등수 판별
+        if (matchedCount == 6) {
+            return "1등 (6개 숫자 모두 일치)";
+        } else if (matchedCount == 5 && hasBouns) {
+            return "2등 (5개 숫자 + 보너스 숫자 일치)";
+        } else if (matchedCount == 5) {
+            return "3등 (5개 숫자 일치)";
+        } else if (matchedCount == 4) {
+            return "4등 (4개 숫자 일치)";
+        } else if (matchedCount == 3) {
+            return "5등 (3개 숫자 일치)";
+        } else {
+            return "낙첨입니다.";
+        }
     }
 
     // 숫자 유효성 검사 메서드
